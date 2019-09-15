@@ -40,3 +40,23 @@ Run the following command to build the docker image flask-sample-one from web di
 $ docker build -t flask-sample-one:latest .
 Run the Docker Container
 $ docker run -d -p 5000:5000 flask-sample-one
+
+
+
+Dockerfile for django application
+#########################################
+FROM python:3
+ENV PYTHONUNBUFFERED 1
+RUN mkdir /app
+WORKDIR /app
+COPY requirements.txt /app/
+RUN pip3 install -r requirements.txt
+COPY . /app/
+CMD [ "python", "./manage.py", "runserver", "0.0.0.0:8000"]
+requirements.txt
+##############################
+[ec2-user@ip-172-31-2-28 HelloWorld]$ cat requirements.txt
+Django==2.2.5
+
+[ec2-user@ip-172-31-2-28 HelloWorld]$ cat  settings.py | grep -i ALLOWED
+ALLOWED_HOSTS = ["54.241.188.23"]
